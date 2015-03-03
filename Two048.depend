@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1425389042 source:e:\c programscodeblocks\two048\main.c
+	<stdio.h>
+	<conio.h>
+	<stdlib.h>
+	<time.h>
+	<math.h>
+	<string.h>
+	<windows.h>
+
