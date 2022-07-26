@@ -14,6 +14,9 @@ typedef struct node lnode;
 int **a, **b, **r, x, y, n, flag, won, cheated=0, lost, checkedHOF, highestOnBoard;
 double sec;
 long int score;
+
+void showHOF();
+
 struct attributes
 {
     int a[20][20], b[20][20], r[20][20], x, y, n, flag, won, cheated, lost;
@@ -1086,11 +1089,11 @@ void prnmat()
         printf("\n");
     }
     printf("\n");
-    /*for(i=0;i<n;i++)
+    for(i=0;i<n;i++)
     {
         for(j=0;j<n;j++) printf("%d ",b[i][j]);
         printf("\n");
-    }*/
+    }
 }
 int getNearestPowerOf2(int c)
 {
@@ -1171,18 +1174,14 @@ void freeall()
 void freeList()
 {
     if((front==NULL)&&(present==NULL)) return;
-    //printf("Reached 1");getch();
     while(front->prev!=NULL)
     {
-        //printf("Reached 2");getch();
         lnode *tempor;
         tempor=front;
         front=front->prev;
         free(tempor);
     }
-    //printf("Reached 3");getch();
     rear=present=front;
-    //printf("Reached 4");getch();
     free(rear);
     front=rear=present=NULL;
 }
