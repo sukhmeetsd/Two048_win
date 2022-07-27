@@ -5,6 +5,7 @@
 #include<math.h>
 #include <string.h>
 #include<windows.h>
+#include "utils/get_nearest_power_of_2/get_nearest_power_of_2.h"
 #define MAXSAVE 20
 #define MAXHALL 10
 #define MAXNODES 15
@@ -16,6 +17,7 @@ double sec;
 long int score;
 
 void showHOF();
+int updateArrayHOF(int, hall *);
 
 struct attributes
 {
@@ -213,10 +215,10 @@ void checkAndWriteHOF()
     hall h[MAXHALL];
     int hallStrength=0;
     rewind(fp);
-    fread(&hallStrength,sizeof(int),1,fp);
-    fread(h,sizeof(h),1,fp);
+    fread(&hallStrength, sizeof(int),1,fp);
+    fread(h,sizeof(h), 1, fp);
     //printf("HallStrength = %d",hallStrength);getch();
-    int pos=updateArrayHOF(hallStrength,&h);
+    int pos=updateArrayHOF(hallStrength, &h);
     //printf("hallStrength ehe a = %d. %d ehe pos a, karda phos aa :D",hallStrength,pos);getch();
     if(pos!=-1)
     {
@@ -1088,23 +1090,6 @@ void prnmat()
         for(k=0; k<n; k++) printf("\t------\t");
         printf("\n");
     }
-    printf("\n");
-    for(i=0;i<n;i++)
-    {
-        for(j=0;j<n;j++) printf("%d ",b[i][j]);
-        printf("\n");
-    }
-}
-int getNearestPowerOf2(int c)
-{
-    if(c==1) return 2;
-    int pwr=10;
-    while(c>pow(2,pwr)) pwr+=5;
-    int i=pwr>10?(pwr-5):1;
-    while(pow(2,i++)<=c);
-    i-=2;
-    if(pow(2,i)==c) return c;
-    else return((c-pow(2,i))<(pow(2,(i+1))-c)? pow(2,i):pow(2,(i+1)));
 }
 int filled()
 {
@@ -1185,7 +1170,8 @@ void freeList()
     free(rear);
     front=rear=present=NULL;
 }
-void main()
+
+int main()
 {
     srand(time(NULL));
     printf("\n>>>>>>>>>>>> Welcome to SSD\'s 2048 <<<<<<<<<<<<\n\n");
@@ -1206,4 +1192,5 @@ void main()
     getch();
     printMenu();
     freeall();
+    return 0;
 }
